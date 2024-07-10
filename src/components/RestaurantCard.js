@@ -1,6 +1,5 @@
 import { RESTAURANT_IMG_BASE_URL } from "./utils/constants";
 const RestaurantCard = ({ restaurant }) => {
-  console.log(restaurant);
   const { cloudinaryImageId, cuisines, name, avgRating, costForTwo } =
     restaurant;
   const deliveryTime = restaurant.sla.deliveryTime;
