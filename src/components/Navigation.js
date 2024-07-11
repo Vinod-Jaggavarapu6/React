@@ -1,7 +1,20 @@
 import { useState } from "react";
-
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 const Navigation = () => {
   const [btnName, setBtnName] = useState("Login");
+
+  useEffect(() => {
+    console.log("useEffect hook with []");
+  }, []);
+
+  useEffect(() => {
+    console.log("useEffect hook without []");
+  });
+
+  useEffect(() => {
+    console.log("useEffect hook with [btnName]");
+  }, [btnName]);
 
   console.log("Component rendered");
 
@@ -16,9 +29,15 @@ const Navigation = () => {
   return (
     <div className="nav-container">
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contact">Contact Us</Link>
+        </li>
         <li>Cart</li>
         <button className="login-btn" onClick={changeBtnName}>
           {btnName}

@@ -3,11 +3,11 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 
+import { Link } from "react-router-dom";
+
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-
-  console.log(listOfRestaurants);
 
   const filterTopRatedRestaurants = () => {
     setResList(
@@ -28,20 +28,17 @@ const Body = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect hook");
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const res = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168"
     );
     const data = await res.json();
     setListOfRestaurants(
       data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-
-    console.log(listOfRestaurants);
 
     setResList(
       data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -55,18 +52,23 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body-container">
-      <Search onSearch={filterRestaurants} />
-      <div className="filter">
-        <button className="filter-btn" onClick={filterTopRatedRestaurants}>
-          Top Rated Restaurants
-        </button>
+      <div className="filter-container">
+        <Search onSearch={filterRestaurants} />
+        <div className="filter">
+          <button className="filter-btn" onClick={filterTopRatedRestaurants}>
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
+
       <div className="res-container">
         {resList.map((restaurant) => (
-          <RestaurantCard
-            restaurant={restaurant.info}
+          <Link
+            to={`/restaurants/${restaurant.info.id}`}
             key={restaurant.info.id}
-          />
+          >
+            <RestaurantCard restaurant={restaurant.info} />
+          </Link>
         ))}
       </div>
     </div>
