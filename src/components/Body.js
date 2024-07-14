@@ -2,12 +2,20 @@ import Search from "./Search";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import useBody from "../utils/useBody";
 
 import { Link } from "react-router-dom";
 
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 const Body = () => {
-  const [resList, setResList] = useState([]);
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  // const [resList, setResList] = useState([]);
+  // const [listOfRestaurants, setListOfRestaurants] = useState([]);
+
+  const resList = useBody();
+  const listOfRestaurants = useBody();
+
+  const onlineStatus = useOnlineStatus();
 
   const filterTopRatedRestaurants = () => {
     setResList(
@@ -27,27 +35,38 @@ const Body = () => {
     );
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  const fetchData = async () => {
-    const res = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168"
-    );
-    const data = await res.json();
-    setListOfRestaurants(
-      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+  // const fetchData = async () => {
+  //   const res = await fetch(
+  //     "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168"
+  //   );
+  //   const data = await res.json();
+  //   setListOfRestaurants(
+  //     data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
 
-    setResList(
-      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
+  //   setResList(
+  //     data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+  // };
 
   // if (resList?.length == 0) {
   //   return <Shimmer />;
   // }
+
+  if (onlineStatus === false) {
+    return (
+      <div className="body-container">
+        <h1 className="offline">
+          You are offline. please check your internet connection
+        </h1>
+      </div>
+    );
+  }
+
   return resList?.length == 0 ? (
     <Shimmer />
   ) : (

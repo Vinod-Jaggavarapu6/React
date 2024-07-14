@@ -1,22 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Navigation = () => {
   const [btnName, setBtnName] = useState("Login");
 
-  useEffect(() => {
-    console.log("useEffect hook with []");
-  }, []);
-
-  useEffect(() => {
-    console.log("useEffect hook without []");
-  });
-
-  useEffect(() => {
-    console.log("useEffect hook with [btnName]");
-  }, [btnName]);
-
-  console.log("Component rendered");
+  const onlineStatus = useOnlineStatus();
 
   const changeBtnName = () => {
     console.log("btn name change");
@@ -29,6 +18,7 @@ const Navigation = () => {
   return (
     <div className="nav-container">
       <ul>
+        <li>Online Status: {onlineStatus ? "✅" : "🔴"}</li>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -37,6 +27,9 @@ const Navigation = () => {
         </li>
         <li>
           <Link to="/contact">Contact Us</Link>
+        </li>
+        <li>
+          <Link to="/grocery">Grocery</Link>
         </li>
         <li>Cart</li>
         <button className="login-btn" onClick={changeBtnName}>
