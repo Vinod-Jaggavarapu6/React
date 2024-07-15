@@ -71,16 +71,19 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body-container">
-      <div className="filter-container">
+      <div className="flex justify-between items-center mx-4">
         <Search onSearch={filterRestaurants} />
-        <div className="filter">
-          <button className="filter-btn" onClick={filterTopRatedRestaurants}>
+        <div className="filter mx-4">
+          <button
+            className="px-4 p-2 bg-gray-300 rounded-lg"
+            onClick={filterTopRatedRestaurants}
+          >
             Top Rated Restaurants
           </button>
         </div>
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {resList.map((restaurant) => (
           <Link
             to={`/restaurants/${restaurant.info.id}`}

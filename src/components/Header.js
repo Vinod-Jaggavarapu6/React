@@ -8,7 +8,7 @@ const Header = () => {
     console.log("useEffect hook in Header.js");
   }, []);
   return (
-    <div className="header">
+    <div className="flex justify-between items-center shadow-lg mb-4">
       <Logo />
       <Navigation />
     </div>

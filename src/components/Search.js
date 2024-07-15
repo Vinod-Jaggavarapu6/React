@@ -8,14 +8,17 @@ const Search = ({ onSearch }) => {
   };
 
   return (
-    <div className="search-container">
+    <div className="m-4 p-4">
       <input
         type="text"
-        className="search-input"
+        className="w-96 border border-gray border-solid p-2"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       ></input>
-      <button className="search-btn" onClick={handleSearchClick}>
+      <button
+        className="ml-4 p-2 px-4 bg-green-500 rounded-lg"
+        onClick={handleSearchClick}
+      >
         Search
       </button>
     </div>
