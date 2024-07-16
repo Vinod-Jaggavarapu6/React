@@ -1,5 +1,5 @@
 import Search from "./Search";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withNewLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import useBody from "../utils/useBody";
@@ -14,6 +14,8 @@ const Body = () => {
 
   const resList = useBody();
   const listOfRestaurants = useBody();
+
+  const RestaurantCardPromoted = withNewLabel(RestaurantCard);
 
   const onlineStatus = useOnlineStatus();
 
@@ -89,7 +91,11 @@ const Body = () => {
             to={`/restaurants/${restaurant.info.id}`}
             key={restaurant.info.id}
           >
-            <RestaurantCard restaurant={restaurant.info} />
+            {restaurant?.info?.isNewlyOnboarded ? (
+              <RestaurantCardPromoted restaurant={restaurant.info} />
+            ) : (
+              <RestaurantCard restaurant={restaurant.info} />
+            )}
           </Link>
         ))}
       </div>

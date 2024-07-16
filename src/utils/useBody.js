@@ -14,6 +14,7 @@ const useBody = () => {
     setResList(
       data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log(resList);
   };
 
   return resList;

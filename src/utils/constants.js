@@ -9,3 +9,6 @@ export const RESTAURANT_MENU_API =
 
 export const RESTAURANT_LIST_API =
   "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168";
+
+export const FOOD_ITEM_IMAGE_BASE_URL =
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/";

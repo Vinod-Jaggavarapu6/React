@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Navigation = () => {
   const [btnName, setBtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
 
+  const { loggedInUser } = useContext(UserContext);
+
+  console.log(loggedInUser);
+
   const changeBtnName = () => {
     console.log("btn name change");
     if (btnName == "Login") {
-      setBtnName("Logout");
+      setBtnName(loggedInUser);
     } else {
       setBtnName("Login");
     }
@@ -32,7 +37,7 @@ const Navigation = () => {
           <Link to="/grocery">Grocery</Link>
         </li>
         <li className="px-4">Cart</li>
-        <button className="px-4" onClick={changeBtnName}>
+        <button className="px-4 font-bold " onClick={changeBtnName}>
           {btnName}
         </button>
       </ul>

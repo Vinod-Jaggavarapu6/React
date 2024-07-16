@@ -26,4 +26,20 @@ const RestaurantCard = ({ restaurant }) => {
   );
 };
 
+//Higher Order Component
+
+export const withNewLabel = (RestaurantCard) => {
+  const component = (props) => {
+    return (
+      <div className="relative">
+        <div className="absolute top-[0px] left-[0px] bg-green-500 text-white text-sm p-1 rounded-md">
+          New
+        </div>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+  return component;
+};
+
 export default RestaurantCard;
