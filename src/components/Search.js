@@ -27,7 +27,7 @@ const Search = ({ onSearch }) => {
         </button>
       </div>
 
-      <div>
+      {/* <div>
         <label>UserName: </label>
         <input
           type="text"
@@ -35,7 +35,7 @@ const Search = ({ onSearch }) => {
           className="border border-gray-500"
           onChange={(event) => setUserName(event.target.value)}
         ></input>
-      </div>
+      </div> */}
     </>
   );
 };

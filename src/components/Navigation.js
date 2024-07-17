@@ -3,12 +3,16 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
+
 const Navigation = () => {
   const [btnName, setBtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store?.cart?.items);
 
   console.log(loggedInUser);
 
@@ -36,7 +40,10 @@ const Navigation = () => {
         <li className="px-4">
           <Link to="/grocery">Grocery</Link>
         </li>
-        <li className="px-4">Cart</li>
+
+        <li className="px-4 font-bold">
+          <Link to="/cart">Cart ({cartItems?.length} items)</Link>
+        </li>
         <button className="px-4 font-bold " onClick={changeBtnName}>
           {btnName}
         </button>
